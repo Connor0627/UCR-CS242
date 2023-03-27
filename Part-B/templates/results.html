@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BERT-based Text Retrieval System - Results</title>
+    <style>
+      .results-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .results {
+        flex-grow: 1;
+      }
+
+      .result {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ccc;
+      }
+
+      .result .order {
+        float: left;
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 20px;
+      }
+
+      .result .text {
+        margin-left: 70px;
+      }
+
+      .wordcloud {
+        flex-grow: 0;
+        margin-left: 20px;
+        position: relative;
+        text-align: center;
+      }
+
+      .wordcloud img {
+        display: inline-block;
+        max-width: 100%;
+        margin-top: 30px;
+      }
+
+      .wordcloud h3 {
+        position: absolute;
+        top: -1%;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+        padding: 5px;
+        background-color: #fff;
+        border-radius: 5px;
+      }
+
+      .return-container {
+        display: flex;
+        justify-content: center;
+      }
+
+      .return-button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Search Results</h1>
+    <div class="results-container">
+      <div class="results">
+        {% if results %} {% for i, result in enumerate(results) %}
+        <div class="result">
+          <div class="order">{{ i+1 }}.</div>
+          <div class="text">
+            <!-- <h3>{{ result['author'] }} - {{ result['created_at'] }}</h3> -->
+            <p>Time: {{ result['created_at'] }}</p>
+            <p>Author: {{ result['author'] }}</p>
+            <p>User ID: {{ result['id'] }}</p>
+            <p>Text: {{ result['text'] }}</p>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <p>No results found.</p>
+        {% endif %}
+      </div>
+
+      <div class="wordcloud">
+        {% if results %}
+        <h3>Wordcloud from return results</h3>
+        <img
+          src="{{ url_for('static', filename='wordcloud.png') }}"
+          alt="Word Cloud"
+        />
+        {% else %}
+        <img
+          src="{{ url_for('static', filename='no_results.png') }}"
+          alt="No Results"
+        />
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="return-container">
+      <button
+        onclick="window.location.href='{{ url_for('search') }}'"
+        class="return-button"
+      >
+        Return to Search
+      </button>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+{
+    "bearer_token": "your own token",
+    "json_name": "tweets.json",
+    "chunk_size": 100,
+    "file_size_mb": 512,
+    "num_workers": 4
+}

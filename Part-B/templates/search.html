@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Tweets Search Wordcloud Creator - Search</title>
+    <style>
+        /* Define the main container */
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .form-container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 50px;
+        }
+
+        /* Define the header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            width: 100%;
+            max-width: 700px;
+        }
+
+        /* Define the form */
+        form {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* Define the form label */
+        label {
+            margin-bottom: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            display: block;
+        }
+
+        /* Define the form input */
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #f5f8fa;
+            font-size: 14px;
+        }
+
+        input[type="submit"] {
+            background-color: #1da1f2;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body class="container">
+    <h1>Tweets Search Wordcloud Creator</h1>
+    <div class="form-container">
+        <form method="post" action="{{ url_for('results') }}">
+            <label for="query">Query:</label>
+            <input type="text" name="query" id="query" placeholder="search key words">
+            <label for="top_k">Number of Results:</label>
+            <select name="top_k" id="top_k">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+            <label for="engine">Choose engine:</label>
+            <select name="engine" id="engine">
+                <option value="bart">BERT</option>
+                <option value="pylucene">PyLucene</option>
+            </select>
+            <input type="submit" value="Search">
+        </form>
+    </div>
+</body>
+<style>
+    body {
+        background-color: #87cefa;
+    }
+</style>
+
+
+</html>
